@@ -1,6 +1,6 @@
 import React from 'react'
 import "../CSS/Login.css"
-import { clientId,redirectURI } from '../../apiConfig'
+import { clientId,redirectURI } from '../apiConfig'
   export default function Login() {
 
     const handleLogin = () => {
@@ -9,7 +9,9 @@ import { clientId,redirectURI } from '../../apiConfig'
 
   return (
     <div className = "login-page">
-
+        <div className = "hero">
+            <h1 style = {{color:"black"}}>Your Spotify Wrapped !</h1>
+        </div>
     </div>
   )
 }
