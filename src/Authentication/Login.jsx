@@ -1,5 +1,6 @@
 import React from "react";
 import { clientId, redirectURI, getAuthorizationURL } from "../apiConfig";
+import useAuth from "./useAuth"
 export default function Login() {
   const handleLogin = () => {
     const authUrl = getAuthorizationURL();
