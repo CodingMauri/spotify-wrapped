@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import useAuth from "../Authentication/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
-export default function Dashboard({ code }) {
+export default function Dashboard({code}) {
   const client = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+  console.log(client)
   const clientSecret = process.env.REACT_APP_SECRET_KEY;
 
   const spotifyApi = new SpotifyWebApi({
@@ -15,28 +15,32 @@ export default function Dashboard({ code }) {
   useEffect(() => {
     if(!accessToken) return
     spotifyApi.setAccessToken(accessToken)
-
   },[accessToken])
 
   useEffect(() => {
-    spotifyApi.searchTracks(search).then((res) => console.log(res.body));
+    getUserProfile()
   })
-  
 
-  const [search, setSearch] = useState("");
+  const getUserProfile = () => {
+
+    spotifyApi.getMe()
+      .then((data) => {
+        console.log("Trying to get user profile",data.body)
+      })
+      .catch((err) => {
+          console.log("sumn fucked up")
+      })
+
+    }
+
+ 
+    console.log(getUserProfile)
+
   return (
     <div className="flex flex-col w-full h-100vh bg-white ">
       {code}
 
-      <form
-        className=" flex w-full h-[100px]] bg-[#141414] cursor-pointer border-2"
-        type="search"
-        placeholder="Search Songs/Artists"
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-      >
-        <input type="text" placeholder="Search a song " />
-      </form>
+      
     </div>
   );
 }

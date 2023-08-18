@@ -8,19 +8,19 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json()); //Parrsing through json request
 
-console.log(process.env.REACT_APP_SECRET_KEY)
 
 app.post("/refresh", (req, res) => {
   const refreshToken = req.body.refreshToken;
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: "http://localhost:3000",
+    redirectUri: "http://localhost:3000/",
     clientId: '055b41e8385a4c449be13bccfe31ce54',
     clientSecret: '6b760836f7334743b9d0269e37eb4969',
     refreshToken,
   });
   spotifyApi
     .refreshToken()
-    .then(data => {
+    .then(data => 
+        {
       console.log(data.body);
 
       spotifyApi.setAccessToken(data.body["access_token"]);
@@ -31,7 +31,7 @@ app.post("/refresh", (req, res) => {
 app.post("/login", (req, res) => {
   const code = req.body.code;
   const spotifyApi = new SpotifyWebApi({
-    redirectUri: "http://localhost:3000",
+    redirectUri: "http://localhost:3000/",
     clientId: "055b41e8385a4c449be13bccfe31ce54",
     clientSecret: "6b760836f7334743b9d0269e37eb4969",
   });
@@ -43,6 +43,8 @@ app.post("/login", (req, res) => {
         refreshToken: data.body.refresh_token,
         expiresIn: data.body.expires_in,
       });
+
+      
     })
 
 
