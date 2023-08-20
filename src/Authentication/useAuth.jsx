@@ -10,7 +10,6 @@ export default function useAuth(code) {
 
   // Refresh Token
   const intervalRef = useRef();
-  console.log(code)
   const getCodeUrl = () => {
     axios
       .post("http://localhost:3001/login", {
