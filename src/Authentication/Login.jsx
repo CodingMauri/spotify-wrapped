@@ -16,11 +16,11 @@ export default function Login() {
       {code ? (
         <Dashboard code={code} />
       ) : (
-        <div className="inline-flex gap-3 w-full h-full justify-center items-center">
-          <h1 className=" font-bold text-lg ">Your Spotify Wrapped !</h1>
+        <div className = "flex flex-col w-full h-full justify-center items-center bg-[#2E4053]">
+          <h1 className = "m-10 font-bold  text-white font-billionstar drop-shadow-lg lg:text-5xl sm:text-md">RhythmicRecap</h1>
 
           <button
-            className="bg-green-400 rounded-md p-2 text-white [text-shadow:] font-bold cursor-pointer "
+            className=" flex bg-green-400 rounded-md p-2 text-white  font-bold cursor-pointer "
             onClick={handleLogin}
           >
             Login with Spotify
