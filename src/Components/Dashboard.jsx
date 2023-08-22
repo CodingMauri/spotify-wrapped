@@ -3,6 +3,7 @@ import useAuth from "../Authentication/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 export default function Dashboard({ code }) {
   const [topArtists, setTopArtists] = useState([]);
+  
   const [loggedIn, setLoggedIn] = useState();
   const client = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.REACT_APP_SECRET_KEY;
@@ -26,6 +27,7 @@ export default function Dashboard({ code }) {
     .getMyTopArtists({ limit: 10 })
     .then((response) => {
       const topArtistsData = response.body.items;
+      console.log(topArtistsData)
       const artistNames = topArtistsData.map((artist) => artist.name);
       setTopArtists(artistNames);
     })
@@ -33,6 +35,8 @@ export default function Dashboard({ code }) {
       console.error("Error fetching top artists", error);
     });
   }
+
+  console.log(topArtists)
 
   return (
     <div className="flex flex-col w-full h-100vh bg-white ">
