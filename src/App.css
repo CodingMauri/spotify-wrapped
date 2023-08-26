@@ -5,4 +5,10 @@
 @font-face {
     font-family: 'Billionstar';
     src: url('./assets/fonts/Billionstar.ttf');
+
+}
+
+@font-face{
+    font-family:'KOMIKAX';
+    src:url('./assets/fonts/KOMIKAX_.ttf')
 }
