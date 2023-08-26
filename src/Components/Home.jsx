@@ -4,7 +4,7 @@ import Login from "../Authentication/Login";
 export default function Home() {
 
   return (
-    <div className="w-full h-screen flex justify-center items-center bg-[#2E4053]  ">
+    <div className="w-full h-screen bg-[#2E4053]  ">
       <Routes>
         <Route path="/" element={<Login />} />
       </Routes>
