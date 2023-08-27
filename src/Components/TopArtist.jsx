@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function TopArtist({ topArtists, artistImages }) {
+export default function TopArtist({ topArtists, artistImages, firstArtist}) {
   const [reveal, setReveal] = useState(false);
 
   const handleClick = () => {
@@ -11,7 +11,7 @@ export default function TopArtist({ topArtists, artistImages }) {
   return (
     <>
       <motion.div
-        className="w-2/3 h-[100px] m-auto rounded-lg bg-white cursor-pointer"
+        className="w-full h-screen mx-auto rounded-lg"
         transition={{ duration: 0.5 }}
       >
         <div
@@ -19,7 +19,8 @@ export default function TopArtist({ topArtists, artistImages }) {
           onClick={handleClick}
         >
           <>
-            <div className="">
+          
+          <div className="">
               <h1 className=" bolded font-komikax ">Your Top Artist Was ...</h1>
             </div>
             <div className="p-1">LOGO</div>
@@ -27,12 +28,16 @@ export default function TopArtist({ topArtists, artistImages }) {
 
           {reveal ? (
             <>
+              <img className = " rounded-lg shadow-lg" src={artistImages} alt={artistImages} />
+
+
               {topArtists.map((artist, index) => (
+                
                 <>
                   <h3 className="font-komikax" key={index}>
                     {index + 1} {artist}
                   </h3>
-                  <img key = {artistImages.url} src={artistImages} />
+                  
                 </>
               ))}
             </>
