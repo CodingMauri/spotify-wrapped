@@ -3,9 +3,11 @@ import useAuth from "../Authentication/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 import Month from "./Month";
 import { motion } from "framer-motion";
-import TopArtist from "./TopArtist";
 import NavBar from "./NavBar";
+import ScrollFeatures from "./ScrollFeatures";
 export default function Dashboard({ code }) {
+
+  //All pieces of state used to store data
   const [topArtists, setTopArtists] = useState([]);
   const [firstArtist,setFirstArtist] = useState("")
   const [artistImages,setArtistImages] = useState("")
@@ -14,6 +16,24 @@ export default function Dashboard({ code }) {
   const client = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.REACT_APP_SECRET_KEY;
 
+
+  // Array that holds all the titles of the features of the app.
+  // This will allow me to map through the features for the ui design
+  const features = [
+    {
+      "title" : "Your top artist right now is...",
+      "id": "Top-Artist"
+    },
+    {
+      "title": "Your favorite tracks this month were...",
+      "id" : "Top-Tracks",
+    },
+    {
+      "title": "Your top genre this month was",
+      "id" : "Top-Genre",
+    }
+  ]
+// destructuring what i will be using to make request
   const spotifyApi = new SpotifyWebApi({
     clientId: client,
   });
@@ -23,9 +43,7 @@ export default function Dashboard({ code }) {
 
   //Using spotifyWebApi to request top Artist
   const getMyTopArtists = () => {
-    // if(!loggedIn){
-    //   return;
-    // }
+    
     spotifyApi
       .getMyTopArtists({ limit: 10 })
       .then((response) => {
@@ -82,6 +100,7 @@ export default function Dashboard({ code }) {
   
   }
   
+//Rendering all request in 
 
   useEffect(() => {
     if (!accessToken) return;
@@ -91,14 +110,12 @@ export default function Dashboard({ code }) {
   }, [accessToken]);
   
 
-  console.log(topTracks, "I am top tracks")
 
   
   return (
-    <div className="  w-full h-full bg-[#2E4053] ">
-      <NavBar />
-      <TopArtist topArtists = {topArtists} artistImages = {artistImages} firstArtist = {firstArtist}/>
-      <Month topTracks = {topTracks}/>
+    <div className="flex bg-[#2E4053] ">
+      {/* <NavBar /> */}
+      <ScrollFeatures topArtists={topArtists} artistImages = {artistImages} firstArtist = {firstArtist} features = {features}/>
     </div>
   );
 }
