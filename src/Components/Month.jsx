@@ -2,9 +2,9 @@ import React from 'react'
 
 export default function Month({topTracks}) {
   return (
-    <div>{topTracks.map((track) => (
+    <div className = "flex w-full h-full flex-col">{topTracks.map((track,index) => (
         <>
-        <li>{track}</li>
+        <ul key ={index}>{index + 1 }{track}</ul>
         </>
     ))}</div>
   )

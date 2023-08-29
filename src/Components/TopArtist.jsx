@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function TopArtist({ topArtists, artistImages, firstArtist}) {
+export default function TopArtist({ topArtists, artistImages, firstArtist }) {
   const [reveal, setReveal] = useState(false);
 
   const handleClick = () => {
@@ -16,28 +16,29 @@ export default function TopArtist({ topArtists, artistImages, firstArtist}) {
       >
         <div
           className="grid grid-cols-2 gap-2 w-full h-full items-center p-4"
-          onClick={handleClick}
         >
           <>
-          
-          <div className="">
-              <h1 className=" bolded font-komikax ">Your Top Artist Was ...</h1>
+            <div className="flex items-center justify-center z-10 w-full h-full">
+              <h1 className="text-3xl bolded font-komikax text-white drop-shadow-lg">
+                Your Top Artist <br></br>Was ...
+              </h1>
             </div>
-            <div className="p-1">LOGO</div>
+            <div className="p-1 mx-auto font-komikax text-white text-2xl">Logo</div>
           </>
 
           {reveal ? (
             <>
-              <img className = " rounded-lg shadow-lg" src={artistImages} alt={artistImages} />
-
+              <img
+                className=" rounded-lg shadow-lg"
+                src={artistImages}
+                alt={artistImages}
+              />
 
               {topArtists.map((artist, index) => (
-                
                 <>
                   <h3 className="font-komikax" key={index}>
                     {index + 1} {artist}
                   </h3>
-                  
                 </>
               ))}
             </>
