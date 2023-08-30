@@ -5,7 +5,8 @@ module.exports = {
     extend: {
       fontFamily:{
         'billionstar':['billionstar','cursive'],
-        'komikax': ['KOMIKAX','sans-serif']
+        'komikax': ['KOMIKAX','sans-serif'],
+        'overpass' : ['overpass','sans-serif']
       }
     },
   },

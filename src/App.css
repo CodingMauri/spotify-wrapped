@@ -12,3 +12,8 @@
     font-family:'KOMIKAX';
     src:url('./assets/fonts/KOMIKAX_.ttf')
 }
+
+@font-face{
+    font-family:"overpass";
+    src: url('./assets/fonts/overpass/overpass-bold.otf')
+}

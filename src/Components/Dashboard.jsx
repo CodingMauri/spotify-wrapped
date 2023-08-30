@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import useAuth from "../Authentication/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
-import Month from "./Month";
 import { motion } from "framer-motion";
 import NavBar from "./NavBar";
 import ScrollFeatures from "./ScrollFeatures";
@@ -12,6 +11,7 @@ export default function Dashboard({ code }) {
   const [firstArtist,setFirstArtist] = useState("")
   const [artistImages,setArtistImages] = useState("")
   const [topTracks,setTopTracks] = useState([])
+  const [gallery, setGallery] = useState([])
 
   const client = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   const clientSecret = process.env.REACT_APP_SECRET_KEY;
@@ -19,20 +19,7 @@ export default function Dashboard({ code }) {
 
   // Array that holds all the titles of the features of the app.
   // This will allow me to map through the features for the ui design
-  const features = [
-    {
-      "title" : "Your top artist right now is...",
-      "id": "Top-Artist"
-    },
-    {
-      "title": "Your favorite tracks this month were...",
-      "id" : "Top-Tracks",
-    },
-    {
-      "title": "Your top genre this month was",
-      "id" : "Top-Genre",
-    }
-  ]
+ 
 // destructuring what i will be using to make request
   const spotifyApi = new SpotifyWebApi({
     clientId: client,
@@ -42,19 +29,19 @@ export default function Dashboard({ code }) {
  
 
   //Using spotifyWebApi to request top Artist
+
   const getMyTopArtists = () => {
     
     spotifyApi
       .getMyTopArtists({ limit: 10 })
       .then((response) => {
 
-        console.log(response)
         
         const topArtistsData = response.body.items;
         const artistNames = topArtistsData.map((artist) => artist.name); 
         
 
-        //This will allow me to only get the first artist image so that i can display it
+        
 
         const firstArtistImage = topArtistsData.find(
           (artist) => artist.images.length > 0
@@ -62,6 +49,7 @@ export default function Dashboard({ code }) {
         )
 
 
+      
       
         setTopArtists(artistNames);
         setFirstArtist(artistNames[0])
@@ -75,7 +63,6 @@ export default function Dashboard({ code }) {
       
       
   };
-  
   const getTopTracksOfTheMonth = () => {
     const currentDate = new Date();
     const lastMonthDate = new Date(
@@ -91,7 +78,6 @@ export default function Dashboard({ code }) {
   .getMyTopTracks({limit:10,time_range:"short_term"})
   .then((response) => {
     const topTracksData = response.body.items;
-    console.log(topTracksData)
     const topTracksNames = topTracksData.map((tracks) => tracks.name)
 
     setTopTracks(topTracksNames)
@@ -113,9 +99,9 @@ export default function Dashboard({ code }) {
 
   
   return (
-    <div className="flex bg-[#2E4053] ">
+    <div className="flex bg-[#000] ">
       {/* <NavBar /> */}
-      <ScrollFeatures topArtists={topArtists} artistImages = {artistImages} firstArtist = {firstArtist} features = {features}/>
+      <ScrollFeatures topArtists={topArtists} artistImages = {artistImages} firstArtist = {firstArtist} />
     </div>
   );
 }
