@@ -3,15 +3,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FeatureTitle } from "./Features/Title";
 import { TopArtist, TopTracks } from "./Features/FeatureCard";
 
-type TopArtistProps = {
-  artistImages:string;
+type RandomImagesProps = {
+  gallery:string;
 }
-export default function ScrollFeatures({artistImages}:TopArtistProps) {
+export default function ScrollFeatures({gallery}:RandomImagesProps) {
   const features = [
     {
       title: "Your top artist right now is...",
       id: "TopArtist",
       card: TopArtist,
+      gallery:gallery
     },
     {
       title: "Your favorite tracks this month were...",
@@ -40,7 +41,7 @@ export default function ScrollFeatures({artistImages}:TopArtistProps) {
         <div className="w-full sticky top-0 h-screen flex items-center">
           <div className=" relative bg-gray-100 aspect-square w-full rounded-xl">
             {features.map((feature) => (
-              <feature.card  id={feature.id} key={feature.id} />
+              <feature.card   id={feature.id} key={feature.id} />
             ))}
           </div>
         </div>

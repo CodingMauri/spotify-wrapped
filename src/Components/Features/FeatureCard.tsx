@@ -10,7 +10,7 @@ type FeatureCardProps = {
 type CardProps = {
   id:string;
 }
- const FeatureCard = ({ gradient, children , id}: FeatureCardProps) => {
+ const FeatureCard = ({ gradient, children , id,}: FeatureCardProps) => {
   const inViewFeature = useFeatureStore((state) => state.inViewFeature)
 
   return (
@@ -31,8 +31,7 @@ type CardProps = {
 };
 export const TopArtist = ({id}:CardProps) => {
   return (
-   <FeatureCard id = {id}  gradient = "from-[#f7f0ff] to-[#a78afe]">
-    <span />
+   <FeatureCard id = {id}  gradient = "from-[#f7f0ff] to-[#a78afe]" >
    </FeatureCard>
   );
 
@@ -43,7 +42,7 @@ export const TopArtist = ({id}:CardProps) => {
 export const TopTracks = ({id}:CardProps) => {
   return (
     <FeatureCard id = {id}  gradient = "from-[#f5fbff] to-[#addeff]">
-    <span />
+      <span />
    </FeatureCard>
   );
 
