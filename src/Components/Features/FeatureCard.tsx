@@ -8,9 +8,8 @@ type FeatureCardProps = {
   children : React.ReactNode;
 
 } & CardProps ;
-type RandomImagesProps = {
-  gallery: Artist[];
-}
+
+
 type CardProps = {
   id:string;
 }
@@ -18,15 +17,18 @@ type CardProps = {
 type Artist = {
   id: string;
   name: string;
-  images: {
-    url: string;
-    width: number;
-    height: number;
-  }[];
+  images: {url: string}[]
+
 };
  const FeatureCard = ({ gradient, children , id}: FeatureCardProps) => {
   const inViewFeature = useFeatureStore((state) => state.inViewFeature)
+  const setFullscreenFeature = useFeatureStore((state) => state.setFullscreenFeature)
 
+  const handleTransition = () => {
+    setFullscreenFeature(id)
+  }
+
+  console.log(handleTransition)
   return (
     <div
       className={classNames(
@@ -36,7 +38,7 @@ type Artist = {
       )}
     >
       {children}
-      <button className = " font-overpass absolute bg-black text-white bottom-6 right-6 rounded-xl px-4 py-2">
+      <button onClick = {handleTransition} className = " font-overpass absolute bg-black text-white bottom-6 right-6 rounded-xl px-4 py-2">
         Show Me
       </button>
     </div>
@@ -46,12 +48,13 @@ type Artist = {
 
 
 };
-export const TopArtist = ({id}:CardProps & {gallery: Artist[], artistImages:string[]}) => {
+export const TopArtist = ({id,gallery,artistImages,}:CardProps & {gallery: Artist[], artistImages:string[]}) => {
+
   return (
    <FeatureCard id = {id}  gradient = "from-[#f7f0ff] to-[#a78afe]" >
-      <img className = "absolute left-[10%] top-[10%] w-[20%] rounded-xl shadow-lg" src = "https://mir-s3-cdn-cf.behance.net/project_modules/hd/602f4731226337.5646928c3633f.jpg"/>
-      <img className = "absolute left-[70%] top-[20%] w-[25%] rounded-xl shadow-lg" src = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX4mxbhjAhylUPED9JvE4mM53NkkfADZ9JNg&usqp=CAU"/>
-      <img className = "absolute left-[20%] top-[60%] w-[30%] rounded-xl shadow-lg" src = "https://www.billboard.com/wp-content/uploads/2022/05/chance-the-rapper-acid-rap-billboard-1240-1.jpg?w=600"/>
+      <img className = "absolute left-[10%] top-[10%] w-[20%] rounded-xl shadow-lg" src = {artistImages[0]} alt  = "img" />
+      <img className = "absolute left-[70%] top-[20%] w-[25%] rounded-xl shadow-lg" src = {artistImages[1]} alt  = "img" />
+      <img className = "absolute left-[20%] top-[60%] w-[30%] rounded-xl shadow-lg" src = {artistImages[2]} alt  = "img" />
 
    </FeatureCard>
   );

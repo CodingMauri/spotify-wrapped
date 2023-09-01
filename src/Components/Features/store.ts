@@ -4,10 +4,15 @@ import {create} from "zustand"
 type FeaturesStore = {
     inViewFeature: string | null;
     setInViewFeature:(feature: string | null) => void;
+    fullscreenFeature: string | null;
+    setFullscreenFeature:(feature: string | null) => void;
 
 
 }
 export const useFeatureStore = create<FeaturesStore>((set) => ({
     inViewFeature:null,
-    setInViewFeature:(feature: string | null) => set({inViewFeature:feature})
+    setInViewFeature:(feature: string | null) => set({inViewFeature:feature}),
+
+    fullscreenFeature:null,
+    setFullscreenFeature:(feature: string | null) => set({inViewFeature:feature}),
 }));

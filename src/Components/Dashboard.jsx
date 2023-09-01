@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import useAuth from "../Authentication/useAuth";
 import SpotifyWebApi from "spotify-web-api-node";
 import { motion } from "framer-motion";
-import NavBar from "./NavBar";
 import ScrollFeatures from "./ScrollFeatures";
 export default function Dashboard({ code }) {
   //All pieces of state used to store data
@@ -49,12 +48,16 @@ export default function Dashboard({ code }) {
       .then((response) => {
         const topArtistsData = response.body.items;
 
+        console.log(topArtistsData)
+
         //going to grab 3 pictures of random from user top artist data
         const randomIndices = getRandomIndices(topArtistsData.length, 3);
 
         const randomImages = randomIndices.map(
           (index) => topArtistsData[index]
         );
+
+        console.log(randomImages )
 
         const artistNames = topArtistsData.map((artist) => artist.name);
 
@@ -103,6 +106,7 @@ export default function Dashboard({ code }) {
     getTopTracksOfTheMonth();
   }, [accessToken]);
 
+  console.log(topArtists)
   return (
     <div className="flex bg-[#000] ">
       {/* <NavBar /> */}
